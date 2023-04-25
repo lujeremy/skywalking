@@ -39,11 +39,17 @@ public class Configuration {
       : Integer.parseInt(serverPort);
   }
 
-  public String[] oapServices() {
-    if (oapServices == null || oapServices.trim().length() == 0) {
-      throw new IllegalArgumentException("oapServices cannot be null or empty");
-    }
-    return oapServices.split(",");
+  /**
+   * Returns the oapServices as an ArrayList of Strings.
+   *
+   * @return an ArrayList containing the oapServices.
+   * @throws IllegalArgumentException if oapServices is null or empty.
+   */
+  public ArrayList<String> oapServices() {
+      if (oapServices == null || oapServices.trim().length() == 0) {
+          throw new IllegalArgumentException("oapServices cannot be null or empty");
+      }
+      return new ArrayList<>(Arrays.asList(oapServices.split(",")));
   }
 
   public String[] zipkinServices() {
