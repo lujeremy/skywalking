@@ -36,7 +36,7 @@ import com.linecorp.armeria.server.ServiceRequestContext;
 import lombok.SneakyThrows;
 
 public final class ZipkinProxyService extends AbstractHttpService {
-    private final WebClient loadBalancingClient;
+    protected final WebClient loadBalancingClient;
 
     public ZipkinProxyService(String[] zipkinServices) throws Exception {
         final List<Endpoint> endpoints =
