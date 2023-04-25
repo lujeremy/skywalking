@@ -34,20 +34,16 @@ public class Configuration {
   private String zipkinServices;
 
   public int port() {
-    return serverPort == null || serverPort.trim().isEmpty()
+    return serverPort == null || serverPort.trim().length() == 0
       ? 80
       : Integer.parseInt(serverPort);
   }
 
-  /**
-   * Returns an ArrayList containing oapServices.
-   * @return ArrayList of oapServices.
-   */
-  public ArrayList<String> oapServices() {
-      if (oapServices == null || oapServices.trim().length() == 0) {
-          throw new IllegalArgumentException("oapServices cannot be null or empty");
-      }
-      return new ArrayList<>(Arrays.asList(oapServices.split(",")));
+  public String[] oapServices() {
+    if (oapServices == null || oapServices.trim().length() == 0) {
+      throw new IllegalArgumentException("oapServices cannot be null or empty");
+    }
+    return oapServices.split(",");
   }
 
   public String[] zipkinServices() {

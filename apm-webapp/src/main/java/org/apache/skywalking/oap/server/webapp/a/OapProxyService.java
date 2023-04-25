@@ -41,13 +41,13 @@ public final class OapProxyService extends AbstractHttpService {
     private final WebClient loadBalancingClient;
 
     public OapProxyService(String[] oapServices) throws Exception {
-        List<Endpoint> endpoints = new ArrayList<>();
-        for (String oapService : oapServices) {
-            URI uri = URI.create(oapService);
-            String authority = uri.getAuthority();
-            Endpoint endpoint = Endpoint.parse(authority);
-            endpoints.add(endpoint);
-        }
+        final List<Endpoint> endpoints =
+            Stream
+                .of(oapServices)
+                .map(URI::create)
+                .map(URI::getAuthority)
+                .map(Endpoint::parse)
+                .collect(toList());
         loadBalancingClient = newLoadBalancingClient(
             EndpointGroup.of(
                 EndpointSelectionStrategy.roundRobin(),
