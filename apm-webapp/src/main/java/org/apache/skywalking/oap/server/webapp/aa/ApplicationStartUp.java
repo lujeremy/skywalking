@@ -48,13 +48,16 @@ public class ApplicationStartUp {
         final int port = configuration.port();
         final String[] oapServices = configuration.oapServices();
 
+        final String INDEX_HTML_PATH = "/public/index.html";
+        final String ZIPKIN_INDEX_HTML_PATH = "/zipkin-lens/index.html";
+        
         final HttpService indexPage =
             HttpFile
-                .of(ApplicationStartUp.class.getClassLoader(), "/public/index.html")
+                .of(ApplicationStartUp.class.getClassLoader(), INDEX_HTML_PATH)
                 .asService();
         final HttpService zipkinIndexPage =
             HttpFile
-                .of(ApplicationStartUp.class.getClassLoader(), "/zipkin-lens/index.html")
+                .of(ApplicationStartUp.class.getClassLoader(), ZIPKIN_INDEX_HTML_PATH)
                 .asService();
 
         final ZipkinProxyService zipkin = new ZipkinProxyService(configuration.zipkinServices());
