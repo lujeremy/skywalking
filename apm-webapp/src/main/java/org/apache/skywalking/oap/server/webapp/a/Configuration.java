@@ -34,7 +34,7 @@ public class Configuration {
   private String zipkinServices;
 
   public int port() {
-    return serverPort == null || serverPort.trim().length() == 0
+    return serverPort == null || serverPort.trim().isEmpty()
       ? 80
       : Integer.parseInt(serverPort);
   }
